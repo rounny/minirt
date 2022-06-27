@@ -75,6 +75,9 @@ char	**get_line_file(int fd, t_scene *scene)
 	string = NULL;
 	if (fd >= 0)
 	{
+		if (read(fd, &ch, 1) == 0)
+			ft_error("can't read the file, sorry..");
+		res = ft_chrjoin(res, ch);
 		while (read(fd, &ch, 1))
 			res = ft_chrjoin(res, ch);
 		res = ft_chrjoin(res, '\0'); // 

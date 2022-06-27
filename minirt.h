@@ -3,20 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:16:15 by ccamie            #+#    #+#             */
-/*   Updated: 2022/06/27 12:51:30 by lemmon           ###   ########.fr       */
+/*   Updated: 2022/06/27 13:36:58 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# define WIDTH	1080
+# define HEIGHT	720
 // libft
-# include "./libft/libft.h" // 
+// # include "./libft/libft.h" // 
 // mlx
-//# include <mlx.h>
+# include "mlx.h"
+# include "vec3.h"
+# include "vec2.h"
 // printf
 # include <stdio.h>
 // exit
@@ -36,13 +40,6 @@ typedef struct s_cam	t_cam;
 typedef struct s_amb	t_amb;
 typedef struct s_mlx	t_mlx;
 typedef struct s_vec3 	t_vec3;
-
-struct s_vec3
-{
-	float	x;
-	float	y;
-	float	z;
-};
 
 struct s_mlx
 {
@@ -135,7 +132,6 @@ typedef struct s_lgt	t_lgt;
 typedef struct s_cam	t_cam;
 typedef struct s_amb	t_amb;
 typedef struct s_mlx	t_mlx;
-typedef struct s_vec3 	t_vec3;
 
 size_t	ft_strlen2(const char *str); //DELETE IN MAC 
 
@@ -172,6 +168,8 @@ void	check_next_space(char *str, int *i);
 void	check_digit(char *str, int i);
 void	check_vector(t_vec3 vector);
 
-
+void	launch_window(t_scene *scene);
+float	maxf(float a, float b);
+void	draw(t_scene scene);
 
 #endif // MINIRT_H

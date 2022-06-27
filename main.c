@@ -32,8 +32,8 @@ void	check_options(int ac, char **av, t_scene *scene)
 		ft_error("can'r open the file, sorry..");
 	if (check_extention(av[1]))
 		ft_error("only '.rt' extention");
-	if (read(scene->fd, &buf, 1) <= 0)
-		ft_error("can't read the file, sorry..");
+	// if (read(scene->fd, &buf, 1) <= 0)
+	// 	ft_error("can't read the file, sorry..");
 }
 
 int main(int ac, char **av)
@@ -46,5 +46,8 @@ int main(int ac, char **av)
 		ft_error("wrong number of arguments");
 	check_options(ac, av, &scene);
 	parsing(&scene);
+	launch_window(&scene);
+	draw(scene);
+	mlx_loop(scene.mlx.mlx);
 	return (0);
 }
