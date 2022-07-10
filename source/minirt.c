@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivnvtosh <ivnvtosh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:19 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/09 19:16:35 by ivnvtosh         ###   ########.fr       */
+/*   Updated: 2022/07/10 11:54:36 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ t_view	set_view(void *canvas)
 	return (view);
 }
 
+void	set_options(t_scene *scene)
+{
+	scene->camera.rotation = vec3_new(0.0, 26.0, 152.0);
+	matrix_new(scene->matrix);
+	matrix_rotate(scene->matrix, scene->camera.rotation);
+	scene->smooth = FALSE;
+	scene->block = 1;
+}
 
 void	minirt(char *path)
 {
@@ -44,13 +52,9 @@ void	minirt(char *path)
 	scene = (t_scene){};
 	check_options(path, &scene);
 	parsing(&scene);
-	scene.camera.rotation = vec3_new(0.0, 26.0, 152.0);
-	matrix_new(scene.matrix);
-	matrix_rotate(scene.matrix, scene.camera.rotation);
-	scene.smooth = FALSE;
+	set_options(&scene);
 	scene.mlx = set_mlx();
 	scene.view = set_view(scene.mlx.canvas);
-	scene.block = 1;
 	draw(scene);
 	event(&scene);
 } 
