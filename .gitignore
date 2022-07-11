@@ -52,7 +52,7 @@ Mkfile.old
 dkms.conf
 
 # Visual Studio Code
-.vscode
+# .vscode
 
 # CLion
 .idea

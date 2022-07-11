@@ -1,0 +1,28 @@
+{
+	// "42header.username": "ccamie",
+	// "42header.email": "ccamie@student.42.fr",
+	"files.associations": {
+		"minirt.h": "c",
+		"vec3.h": "c",
+		"draw.h": "c",
+		"matrix.h": "c",
+		"stdio.h": "c",
+		"vec2.h": "c",
+		"array": "c",
+		"iterator": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c",
+		"algorithm": "c",
+		"key.h": "c",
+		"iosfwd": "c",
+		"bool.h": "c",
+		"math.h": "c",
+		"__locale": "c",
+		"ray.h": "c",
+		"utils.h": "c",
+		"data.h": "c",
+		"window.h": "c",
+		"event.h": "c"
+	}
+}
