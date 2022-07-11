@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+         #
+#    By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 04:12:14 by ccamie            #+#    #+#              #
-#    Updated: 2022/07/11 11:25:55 by ccamie           ###   ########.fr        #
+#    Updated: 2022/07/11 18:08:38 by lemmon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,13 +83,16 @@ FUNCTIONS	+=	$(addprefix mouse/,		\
 
 FUNCTIONS	+=	$(addprefix parser/,	\
 				parser_main.c			\
-				check_options.c 		\
+				get_line_file.c			\
+				check_file.c 			\
+				check_elements.c		\
 				ambient_lightning.c		\
 				camera.c				\
 				light.c					\
 				utils_atof_atoi.c		\
 				utils.c					\
 				parser_color.c			\
+				parser_vector.c			\
 				sphere.c				\
 				split_rt.c				\
 				plane.c					\

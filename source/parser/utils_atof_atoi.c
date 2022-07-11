@@ -6,12 +6,11 @@
 /*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 14:44:58 by lemmon            #+#    #+#             */
-/*   Updated: 2022/07/09 14:45:01 by lemmon           ###   ########.fr       */
+/*   Updated: 2022/07/11 18:29:04 by lemmon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
 
 static float	ft_atof_get_sign(char *str, int *i)
 {
@@ -62,7 +61,7 @@ float	ft_atof(char *str, int *i)
 	return (tmp);
 }
 
-int	ft_atoi2(const char *str)
+int	ft_atoi(const char *str)
 {
 	int			i;
 	int			sign;
