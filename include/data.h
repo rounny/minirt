@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivnvtosh <ivnvtosh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 12:15:04 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/09 18:26:56 by ivnvtosh         ###   ########.fr       */
+/*   Updated: 2022/07/11 14:10:23 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ enum e_type
 };
 
 typedef int	t_type;
+typedef int	t_key;
 
 struct s_view
 {
@@ -45,17 +46,17 @@ struct s_mlx
 
 struct s_amb // полное название
 {	
-	t_vec3	color; // change rgb to color
-	float	lighting; // am_l to lightng
+	t_vec3	color;
+	float	lighting;
 	int		flag_A;
 };
 
 struct s_cam
 {
-	int flag_C;
+	int		flag_C;
 	t_vec3	location;
 	t_vec3	rotation;
-	int		fov;
+	float	fov;
 	float	focus;
 };
 
@@ -69,10 +70,11 @@ struct s_light
 
 struct s_pln
 {
-	int		flag_pl;
 	t_vec3	location;
 	t_vec3	vector;
+	t_vec3	scale;
 	t_vec3	color;
+	int		flag_pl;
 };
 
 struct s_sphere
@@ -87,12 +89,13 @@ struct s_sphere
 
 struct s_clnd
 {
+	t_vec3	coordinates;
+	t_vec3	vector;
+	t_vec3	scale;
+	t_vec3	color;
 	int		flag_cy;
 	float	diameter;
 	float	height;
-	t_vec3	coordinates;
-	t_vec3	vector;
-	t_vec3	color;
 };
 
 struct s_count
@@ -107,8 +110,39 @@ struct s_count
 
 struct s_object
 {
-	int		type;
+	t_type	type;
 	void	*target;
+};
+
+struct s_keybrd
+{
+	t_bool	action;
+	t_key	code;
+	int		count;
+	t_vec3	direction;
+	t_bool	move;
+	t_bool	fov;
+	float	change;
+};
+
+struct s_mouse
+{
+	t_bool	action;
+	t_key	code;
+	t_vec2	vector;
+};
+
+struct s_press
+{
+	struct s_keybrd	key;
+	struct s_mouse	mouse;
+};
+
+struct s_option
+{
+	t_mat	matrix;
+	t_bool	smooth;
+	int		block;
 };
 
 struct s_scene
@@ -126,13 +160,9 @@ struct s_scene
 	struct s_sphere	*sphere;
 	struct s_pln	*plane;
 	struct s_clnd	*cylinder;
-	struct s_vec2	mouse;
 	struct s_object	object;
-	t_bool			move;
-	t_bool			pressed;
-	t_mat			matrix;
-	int				block;
-	t_bool			smooth;
+	struct s_press	press;
+	struct s_option	option;
 };
 
 typedef struct s_amb	t_amb;
@@ -145,6 +175,10 @@ typedef struct s_sphere	t_sphere;
 typedef struct s_clnd	t_clnd;
 typedef struct s_light	t_light;
 typedef struct s_object	t_object;
+typedef struct s_option	t_option;
+typedef struct s_keybrd	t_keybrd;
+typedef struct s_mouse	t_mouse;
+typedef struct s_press	t_press;
 typedef struct s_scene	t_scene;
 
 #endif // DATA_H

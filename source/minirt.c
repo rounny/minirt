@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:19 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/10 11:54:36 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/11 02:33:37 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,15 @@ t_view	set_view(void *canvas)
 void	set_options(t_scene *scene)
 {
 	scene->camera.rotation = vec3_new(0.0, 26.0, 152.0);
-	matrix_new(scene->matrix);
-	matrix_rotate(scene->matrix, scene->camera.rotation);
-	scene->smooth = FALSE;
-	scene->block = 1;
+	matrix_new(scene->option.matrix);
+	matrix_rotate(scene->option.matrix, scene->camera.rotation);
+	scene->option.smooth = FALSE;
+	scene->option.block = 1;
+	scene->press.key.direction = vec3_newv(0.0);
+	scene->press.key.action = FALSE;
+	scene->press.mouse.action = FALSE;
+	scene->press.key.count = 0;
+	scene->camera.fov = 60;
 }
 
 void	minirt(char *path)
@@ -55,6 +60,7 @@ void	minirt(char *path)
 	set_options(&scene);
 	scene.mlx = set_mlx();
 	scene.view = set_view(scene.mlx.canvas);
+	printf("lol %f\n", scene.camera.fov);
 	draw(scene);
 	event(&scene);
 } 

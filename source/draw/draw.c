@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivnvtosh <ivnvtosh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:40 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/09 19:16:25 by ivnvtosh         ###   ########.fr       */
+/*   Updated: 2022/07/11 03:16:26 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,18 @@ void	_draw(t_scene scene)
 	t_vec3	color;
 	t_vec2	pixel;
 
-
 	pixel.y = 0;
 	while (pixel.y < HEIGHT)
 	{
 		pixel.x = 0;
 		while  (pixel.x < WIDTH)
 		{
-			ray = ray_new(pixel, scene.camera, scene.matrix);
+			ray = ray_new(pixel, scene.camera, scene.option.matrix);
 			color = ray_trace(scene, ray);
-			write_pixels(scene.view, pixel, color, scene.block);
-			pixel.x += scene.block;
+			write_pixels(scene.view, pixel, color, scene.option.block);
+			pixel.x += scene.option.block;
 		}
-		pixel.y += scene.block;
+		pixel.y += scene.option.block;
 	}
 }
 
