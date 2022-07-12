@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 16:35:17 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/08 16:39:03 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/12 08:16:19 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	hit_sphere(t_time *time, t_ray ray, t_sphere *spheres, int count)
 	i = 0;
 	while (i < count)
 	{
-		spheres[i].time = draw_sphere(ray, spheres[i].location, spheres[i].radius);
+		spheres[i].time = draw_sphere(ray, spheres[i].location, \
+													spheres[i].radius);
 		i += 1;
 	}
 	index = get_min_index(spheres, count);

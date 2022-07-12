@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:46 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/08 16:17:30 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/12 08:23:46 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,20 @@ void	write_pixels(t_view view, t_vec2 pixel, t_vec3 color, float block)
 			pixel.x += 1;
 		}
 		pixel.y += 1;
+	}
+}
+
+void	write_line(t_view view, t_vec2 start, t_vec2 end, t_vec3 color)
+{
+	t_vec2	step;
+	float	max;
+
+	step = vec2_sub(end, start);
+	max = maxf(step.x, step.y);
+	step = vec2_divv(step, max);
+	while ((int)(start.x - end.x) || (int)(start.y - end.y))
+	{
+		write_pixel(view, start, color);
+		start = vec2_add(start, step);
 	}
 }

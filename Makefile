@@ -6,7 +6,7 @@
 #    By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 04:12:14 by ccamie            #+#    #+#              #
-#    Updated: 2022/07/12 08:11:20 by ccamie           ###   ########.fr        #
+#    Updated: 2022/07/12 08:22:48 by ccamie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,9 +115,12 @@ FUNCTIONS	+=	$(addprefix utils/,		\
 				)
 
 FUNCTIONS	+=	$(addprefix vec2/,		\
+				add.c					\
+				divide.c				\
 				lenght.c				\
 				new.c					\
 				print.c					\
+				subtract.c				\
 				)
 
 FUNCTIONS	+=	$(addprefix vec3/,		\
