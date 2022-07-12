@@ -24,6 +24,7 @@
 		"data.h": "c",
 		"window.h": "c",
 		"event.h": "c",
-		"mouse.h": "c"
+		"mouse.h": "c",
+		"__node_handle": "c"
 	}
 }

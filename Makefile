@@ -6,7 +6,7 @@
 #    By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 04:12:14 by ccamie            #+#    #+#              #
-#    Updated: 2022/07/12 09:26:16 by ccamie           ###   ########.fr        #
+#    Updated: 2022/07/12 15:36:15 by ccamie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,13 @@ CC			=	cc
 CPPFLAGS	=	-I include
 CPPFLAGS	+=	-Wall -Wextra -Werror
 
-CPPFLAGS	+=	-O2
+# CPPFLAGS	+=	-O2
 CPPFLAGS	+=	-g
 
 CFLAGS		=	-framework OpenGL -framework AppKit libmlx/libmlx.a
 
 CFLAGS		+=	-fsanitize=address
-CFLAGS		+=	-fsanitize=undefined
+# CFLAGS		+=	-fsanitize=undefined
 
 ECHO		=	@echo
 
@@ -61,6 +61,7 @@ FUNCTIONS	+=	$(addprefix draw/,		\
 				hit.c					\
 				)						\
 				draw.c					\
+				find_object.c			\
 				write.c					\
 				)
 
