@@ -6,7 +6,7 @@
 #    By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 04:12:14 by ccamie            #+#    #+#              #
-#    Updated: 2022/07/12 08:22:48 by ccamie           ###   ########.fr        #
+#    Updated: 2022/07/12 09:26:16 by ccamie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ FUNCTIONS	+=	$(addprefix event/,		\
 				key_up.c				\
 				mouse_down.c			\
 				mouse_up.c				\
+				terminate.c				\
 				thread.c				\
 				)
 
@@ -110,7 +111,6 @@ FUNCTIONS	+=	$(addprefix utils/,		\
 				matrix_rotate.c			\
 				maxf.c					\
 				minf.c					\
-				terminate.c				\
 				vec3_mulmat.c			\
 				)
 
