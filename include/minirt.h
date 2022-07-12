@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:03 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/12 07:54:35 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/12 08:10:59 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 void	draw(t_scene scene);
 void	event(t_scene *scene);
 void	minirt(char *path);
-void	check_options(char *path, t_scene *scene);
+void	check_open(char *path, t_scene *scene);
 void	parsing(t_scene *scene);
 int		terminate(t_scene *scene);
 

@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:19 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/12 08:01:23 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/12 08:11:10 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	minirt(char *path)
 	t_scene	scene;
 
 	scene = (t_scene){};
-	check_options(path, &scene);
+	check_open(path, &scene);
 	parsing(&scene);
 	set_options(&scene);
 	scene.mlx = set_mlx();

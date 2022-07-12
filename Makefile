@@ -6,7 +6,7 @@
 #    By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 04:12:14 by ccamie            #+#    #+#              #
-#    Updated: 2022/07/12 07:59:02 by ccamie           ###   ########.fr        #
+#    Updated: 2022/07/12 08:11:20 by ccamie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,13 +84,16 @@ FUNCTIONS	+=	$(addprefix matrix/,	\
 
 FUNCTIONS	+=	$(addprefix parser/,	\
 				parser_main.c			\
-				check_options.c 		\
+				get_line_file.c			\
+				check_file.c 			\
+				check_elements.c		\
 				ambient_lightning.c		\
 				camera.c				\
 				light.c					\
 				utils_atof_atoi.c		\
 				utils.c					\
 				parser_color.c			\
+				parser_vector.c			\
 				sphere.c				\
 				split_rt.c				\
 				plane.c					\

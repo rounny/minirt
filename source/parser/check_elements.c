@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylinder.c                                         :+:      :+:    :+:   */
+/*   check_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/09 14:44:12 by lemmon            #+#    #+#             */
-/*   Updated: 2022/07/11 15:47:20 by lemmon           ###   ########.fr       */
+/*   Created: 2022/07/11 15:20:39 by lemmon            #+#    #+#             */
+/*   Updated: 2022/07/11 18:01:54 by lemmon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	parse_cylinder(char *str, t_clnd *cylinder, t_scene *scene)
+void	check_digit(char *str, int i)
 {
-	int	i;
+	while (str[i] == ' ')
+		++i;
+	if (str[i] < '0' || str[i] > '9')
+		ft_error("invalid argument");
+}
 
-	i = 0;
-	check_next_element(str, i);
-	cylinder->coordinates = parse_vector(str, &i);
-	cylinder->vector = parse_vector(str, &i);
-	check_vector(cylinder->vector);
-	check_digit(str, i);
-	cylinder->diameter = ft_atof(str, &i);
-	check_digit(str, i);
-	cylinder->height = ft_atof(str, &i);
-	cylinder->color = parsing_color(str, i, scene);
+void	check_next_space(char *str, int *i)
+{
+	while (str[*i] == ' ')
+		++(*i);
+}
+
+void	check_next_element(char *str, int i)
+{
+	while (str[i] == ' ')
+		++i;
+	if (str[i] == '-')
+		++i;
+	if (str[i] > '9' || str[i] < '0')
+		ft_error("invalid argument_3");
 }

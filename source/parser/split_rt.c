@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   split_rt.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivnvtosh <ivnvtosh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 14:44:54 by lemmon            #+#    #+#             */
-/*   Updated: 2022/07/09 18:27:16 by ivnvtosh         ###   ########.fr       */
+/*   Updated: 2022/07/11 18:28:07 by lemmon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
 
 static int	ft_found_word_rt(char const *s, char c)
 {
@@ -74,7 +73,7 @@ static char	**ft_create_rt(char **matrix, int countword, char const *s, char c)
 	return (matrix);
 }
 
-static char	**ft_saveword_rt(char **matrix, int countword, char const *s, char c)
+static char	**ft_saveword(char **matrix, int countword, char const *s, char c)
 {
 	int	y;
 	int	i;
@@ -105,7 +104,6 @@ char	**ft_split_rt(char const *s, char c, t_scene *scene)
 	int		countword;
 
 	countword = ft_found_word_rt(s, c);
-	// opt->count_line = countword;
 	if (scene->flag_line == 0)
 	{
 		scene->count_line = countword;
@@ -118,6 +116,6 @@ char	**ft_split_rt(char const *s, char c, t_scene *scene)
 	matrix = ft_create_rt(matrix, countword, s, c);
 	if (matrix == NULL)
 		return (NULL);
-	matrix = ft_saveword_rt(matrix, countword, s, c);
+	matrix = ft_saveword(matrix, countword, s, c);
 	return (matrix);
 }

@@ -3,44 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivnvtosh <ivnvtosh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/09 14:45:05 by lemmon            #+#    #+#             */
-/*   Updated: 2022/07/09 18:22:52 by ivnvtosh         ###   ########.fr       */
+/*   Created: 2022/07/11 15:39:32 by lemmon            #+#    #+#             */
+/*   Updated: 2022/07/11 15:41:12 by lemmon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-
-int	ft_atoi_rt(const char *str)
-{
-	size_t	i;
-	int		num;
-	// int		count_num;
-	size_t		j;
-
-	// count_num = 0;
-	i = 0;
-	num = 0;
-	j = 0;
-	while (str[j])
-	{
-		if ((str[j] >= '0' && str[j] <= '9') || str[j] == ' ')
-			j++;
-		// else
-		// 	ft_error("wrong color argument");
-	}
-	while (str[i] == ' ')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		num = num * 10 + str[i++] - '0';
-	}
-	if (num < 0 || num > 255)
-		ft_error("wrong color argument");
-	return (num);
-}
 
 void	ft_error(char *msg)
 {
@@ -48,56 +18,25 @@ void	ft_error(char *msg)
 	exit(1);
 }
 
-char	*ft_chrjoin(char *s1, char s2)
+size_t	ft_strlen(const char *str)
 {
-	char	*tmp;
-	long	i;
+	size_t	i;
 
-	i = -1;
-	if (s1)
-	{
-		tmp = malloc(sizeof(char) * ((ft_strlen(s1) + 2)));
-		if (!tmp)
-			return (NULL);
-		while (s1[++i])
-			tmp[i] = s1[i];
-		tmp[i] = s2;
-		tmp[i + 1] = '\0';
-		free (s1);
-	}
-	else
-	{
-		tmp = malloc(sizeof(char) * 2);
-		if (!tmp)
-			return (NULL);
-		tmp[0] = s2;
-		tmp[1] = '\0';
-	}
-	return (tmp);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
-char	**get_line_file(int fd, t_scene *scene)
+void	count_separator(char *str, int *i, int *sep)
 {
-	char	ch;
-	char	*res;
-	char	**string;
-	// int		i;
-
-	// i = -1;
-	res = NULL;
-	string = NULL;
-	if (fd >= 0)
+	while (str[*i] == ' ')
+		++(*i);
+	if (str[*i] == ',')
 	{
-		if (read(fd, &ch, 1) == 0)
-			ft_error("can't read the file, sorry..");
-		res = ft_chrjoin(res, ch);
-		while (read(fd, &ch, 1))
-			res = ft_chrjoin(res, ch);
-		res = ft_chrjoin(res, '\0'); // 
-		string = ft_split_rt(res, '\n', scene); //
-		if (!string)
-			return (NULL);
-		return (string);
+		++(*sep);
+		++(*i);
 	}
-	return (NULL);
+	while (str[*i] == ' ')
+		++(*i);
 }
