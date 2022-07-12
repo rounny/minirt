@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 16:01:03 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/09 13:19:07 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/12 08:02:00 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,4 @@ typedef struct s_ray	t_ray;
 t_ray	ray_new(t_vec2 pixel, t_cam camera, t_mat matrix);
 t_vec3	ray_pos(t_ray ray, float time);
 
-# endif // RAY_H
+#endif // RAY_H

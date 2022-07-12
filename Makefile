@@ -6,7 +6,7 @@
 #    By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 04:12:14 by ccamie            #+#    #+#              #
-#    Updated: 2022/07/11 11:25:55 by ccamie           ###   ########.fr        #
+#    Updated: 2022/07/12 07:59:02 by ccamie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ RM			=	@rm -f
 
 HEADER		=	$(addprefix include/,	\
 				bool.h					\
+				data.h					\
 				draw.h					\
 				event.h					\
 				key.h					\
@@ -51,8 +52,7 @@ HEADER		=	$(addprefix include/,	\
 				window.h				\
 				)
 
-FUNCTIONS	=	event.c					\
-				main.c					\
+FUNCTIONS	=	main.c					\
 				minirt.c				\
 
 FUNCTIONS	+=	$(addprefix draw/,		\
@@ -64,8 +64,13 @@ FUNCTIONS	+=	$(addprefix draw/,		\
 				write.c					\
 				)
 
-FUNCTIONS	+=	$(addprefix keyboard/,	\
-				keyboard.c				\
+FUNCTIONS	+=	$(addprefix event/,		\
+				event.c					\
+				key_down.c				\
+				key_up.c				\
+				mouse_down.c			\
+				mouse_up.c				\
+				thread.c				\
 				)
 
 FUNCTIONS	+=	$(addprefix matrix/,	\
@@ -75,10 +80,6 @@ FUNCTIONS	+=	$(addprefix matrix/,	\
 				new.c					\
 				print.c					\
 				rotate.c				\
-				)
-
-FUNCTIONS	+=	$(addprefix mouse/,		\
-				mouse.c					\
 				)
 
 FUNCTIONS	+=	$(addprefix parser/,	\

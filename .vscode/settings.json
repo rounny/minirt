@@ -23,6 +23,7 @@
 		"utils.h": "c",
 		"data.h": "c",
 		"window.h": "c",
-		"event.h": "c"
+		"event.h": "c",
+		"mouse.h": "c"
 	}
 }

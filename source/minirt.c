@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:19 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/11 02:33:37 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/12 08:01:23 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	minirt(char *path)
 	set_options(&scene);
 	scene.mlx = set_mlx();
 	scene.view = set_view(scene.mlx.canvas);
-	printf("lol %f\n", scene.camera.fov);
 	draw(scene);
 	event(&scene);
-} 
+}
