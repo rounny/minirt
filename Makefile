@@ -6,7 +6,7 @@
 #    By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 04:12:14 by ccamie            #+#    #+#              #
-#    Updated: 2022/07/12 15:36:15 by ccamie           ###   ########.fr        #
+#    Updated: 2022/07/13 00:45:40 by ccamie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,12 @@ CC			=	cc
 CPPFLAGS	=	-I include
 CPPFLAGS	+=	-Wall -Wextra -Werror
 
-# CPPFLAGS	+=	-O2
-CPPFLAGS	+=	-g
+CPPFLAGS	+=	-O2
+# CPPFLAGS	+=	-g
 
 CFLAGS		=	-framework OpenGL -framework AppKit libmlx/libmlx.a
 
-CFLAGS		+=	-fsanitize=address
+# CFLAGS		+=	-fsanitize=address
 # CFLAGS		+=	-fsanitize=undefined
 
 ECHO		=	@echo

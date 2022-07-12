@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 04:10:14 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/06 22:45:36 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/13 01:09:29 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@
 # define KEY_S		1
 # define KEY_D		2
 # define KEY_Z		6
+# define KEY_X		7
 # define KEY_C		8
 # define KEY_Q		12
 # define KEY_W		13
 # define KEY_E		14
+# define KEY_Y		16
 # define KEY_ONE	18
 # define KEY_TWO	19
 # define KEY_THREE	20

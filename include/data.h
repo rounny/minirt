@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 12:15:04 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/12 08:02:50 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/13 01:16:10 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,10 @@ struct s_object
 {
 	t_type	type;
 	void	*target;
+	t_bool	action;
+	t_bool	x;
+	t_bool	y;
+	t_bool	z;
 };
 
 struct s_keybrd

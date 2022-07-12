@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 07:17:36 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/12 15:51:49 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/13 01:26:25 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,20 @@ int	mouse_find(t_vec2 pixel, t_scene *scene)
 	object = find_object(*scene, ray);
 	if (object.type == NIL)
 		return (0);
-	printf("Object found\n");
+	scene->press.mouse.action = TRUE;
+	if (object.target == scene->object.target)
+	{
+		scene->object.type = NIL;
+		scene->object.target = NULL;
+		scene->object.x = FALSE;
+		scene->object.y = FALSE;
+		scene->object.z = FALSE;
+		return (0);
+	}
+	scene->object = object;
+	scene->object.x = TRUE;
+	scene->object.y = TRUE;
+	scene->object.z = TRUE;
 	return (0);
 }
 
