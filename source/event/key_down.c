@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 16:31:58 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/13 01:27:34 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/13 10:37:26 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ int	mouse_axes_x(int x, int y, t_scene *scene)
 	sphere->location.x += (x - scene->press.mouse.vector.x) * 0.1;
 	sphere->location.x += (y - scene->press.mouse.vector.y) * 0.1;
 	scene->press.mouse.vector = vec2_new(x, y);
-	// matrix_new(scene->option.matrix);
-	// matrix_rotate(scene->option.matrix, scene->camera.rotation);
 	scene->press.mouse.action = TRUE;
 	return (0);
 }
@@ -94,8 +92,6 @@ int	mouse_axes_y(int x, int y, t_scene *scene)
 	sphere->location.y += (x - scene->press.mouse.vector.x) * 0.1;
 	sphere->location.y += (y - scene->press.mouse.vector.y) * 0.1;
 	scene->press.mouse.vector = vec2_new(x, y);
-	// matrix_new(scene->option.matrix);
-	// matrix_rotate(scene->option.matrix, scene->camera.rotation);
 	scene->press.mouse.action = TRUE;
 	return (0);
 }
@@ -108,9 +104,28 @@ int	mouse_axes_z(int x, int y, t_scene *scene)
 	sphere->location.z += (x - scene->press.mouse.vector.x) * 0.1;
 	sphere->location.z += (y - scene->press.mouse.vector.y) * 0.1;
 	scene->press.mouse.vector = vec2_new(x, y);
-	// matrix_new(scene->option.matrix);
-	// matrix_rotate(scene->option.matrix, scene->camera.rotation);
 	scene->press.mouse.action = TRUE;
+	return (0);
+}
+
+int	mouse_vector_x(int x, int y, t_scene *scene)
+{
+	scene->press.mouse.vector = vec2_new(x, y);
+	mlx_hook(scene->mlx.win, ON_MOUSEMOVE, 0, mouse_axes_x, scene);
+	return (0);
+}
+
+int	mouse_vector_y(int x, int y, t_scene *scene)
+{
+	scene->press.mouse.vector = vec2_new(x, y);
+	mlx_hook(scene->mlx.win, ON_MOUSEMOVE, 0, mouse_axes_y, scene);
+	return (0);
+}
+
+int	mouse_vector_z(int x, int y, t_scene *scene)
+{
+	scene->press.mouse.vector = vec2_new(x, y);
+	mlx_hook(scene->mlx.win, ON_MOUSEMOVE, 0, mouse_axes_z, scene);
 	return (0);
 }
 
@@ -124,21 +139,22 @@ int	key_down(t_key key, t_scene *scene)
 		scene->object.x = TRUE;
 		scene->object.y = FALSE;
 		scene->object.z = FALSE;
-		mlx_hook(scene->mlx.win, ON_MOUSEMOVE, 0, mouse_axes_x, scene);
+		mlx_hook(scene->mlx.win, ON_MOUSEMOVE, 0, mouse_vector_x, scene);
+
 	}
 	if (key == KEY_Y)
 	{
 		scene->object.x = FALSE;
 		scene->object.y = TRUE;
 		scene->object.z = FALSE;
-		mlx_hook(scene->mlx.win, ON_MOUSEMOVE, 0, mouse_axes_y, scene);
+		mlx_hook(scene->mlx.win, ON_MOUSEMOVE, 0, mouse_vector_y, scene);
 	}
 	if (key == KEY_Z)
 	{
 		scene->object.x = FALSE;
 		scene->object.y = FALSE;
 		scene->object.z = TRUE;
-		mlx_hook(scene->mlx.win, ON_MOUSEMOVE, 0, mouse_axes_z, scene);
+		mlx_hook(scene->mlx.win, ON_MOUSEMOVE, 0, mouse_vector_z, scene);
 	}
 	movement(key, &(scene->press.key.direction), &(scene->press.key.move));
 	check_fov(key, &(scene->press.key.change), &(scene->press.key.fov));

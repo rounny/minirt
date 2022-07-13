@@ -6,7 +6,7 @@
 #    By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 04:12:14 by ccamie            #+#    #+#              #
-#    Updated: 2022/07/13 00:45:40 by ccamie           ###   ########.fr        #
+#    Updated: 2022/07/13 12:01:08 by ccamie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ FUNCTIONS	+=	$(addprefix draw/,		\
 				draw.c					\
 				hit.c					\
 				)						\
+				axes.c					\
 				draw.c					\
 				find_object.c			\
 				write.c					\

@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 16:35:17 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/12 08:16:19 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/13 11:55:38 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,14 @@ void	hit_sphere(t_time *time, t_ray ray, t_sphere *spheres, int count)
 		i += 1;
 	}
 	index = get_min_index(spheres, count);
-	time->index = index;
+	if (index == -1)
+	{
+		return ;
+	}
 	if (spheres[index].time.x < time->time)
 	{
+		time->index = index;
 		time->time = spheres[index].time.x;
+		time->type = SPHERE;
 	}
 }
