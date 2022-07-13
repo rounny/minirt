@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 11:59:54 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/13 12:00:25 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/13 13:28:53 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ float	grean(t_ray ray, t_vec3 origin)
 	t_vec3	t;
 
 	t.x = (origin.x - ray.origin.x) / ray.direction.x;
-	t.z = (origin.y - ray.origin.z) / ray.direction.z;
+	t.z = (origin.z - ray.origin.z) / ray.direction.z;
 	if (t.x - t.z < -1 || t.x - t.z > 1)
 	{
 		return (-1.0);
