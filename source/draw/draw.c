@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:40 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/13 22:02:38 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/14 19:33:20 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	_draw(t_scene scene, t_vec2 start, t_vec2 end)
 }
 
 #include <pthread.h>
+#include <sys/time.h>
 
 struct s_thread
 {
@@ -96,18 +97,28 @@ struct s_thread
 
 typedef struct s_thread	t_thread;
 
-#define TH_KERL	4
+#define TH_KERL	8
+
 
 void	*lol(void *pointer)
 {
 	t_thread	kek;
+struct timeval	temp;
+long			time1;
 	t_scene		scene;
 	int			i;
-
+	struct timeval	temp2;
+	long			time2;
+	
+	gettimeofday(&temp, NULL);
+	time1 = temp.tv_sec * 1000 + temp.tv_usec / 1000;
 	kek = *(t_thread *)pointer;
 	scene = *kek.scene;
 	i = kek.i;
 	_draw(scene, vec2_new(WIDTH / TH_KERL * i, 0), vec2_new(WIDTH / TH_KERL * (i + 1), HEIGHT));
+	gettimeofday(&temp2, NULL);
+	time2 = temp2.tv_sec * 1000 + temp2.tv_usec / 1000;
+	printf("%d: %ld\n", i, time2 - time1);
 	return (NULL);
 }
 
@@ -118,18 +129,19 @@ void	draw(t_scene scene)
 	int			i;
 
 	i = 0;
-	while (i < TH_KERL)
+	// while (i < TH_KERL)
 	{
 		kek[i].i = i;
 		kek[i].scene = &scene;
 		pthread_create(&thread[i], NULL, lol, &kek[i]);
 		i += 1;
 	}
-	i = 0;
-	while (i < TH_KERL)
-	{
+	// i = 0;
+	// while (i < TH_KERL)
+	// {
 		pthread_join(thread[i], NULL);
-		i += 1;
-	}
+		// i += 1;
+	// }
+	printf("-----\n");
 	mlx_put_image_to_window(scene.mlx.mlx, scene.mlx.win, scene.mlx.canvas, 0, 0);
 }
