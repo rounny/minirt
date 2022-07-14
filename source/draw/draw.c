@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:40 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/13 13:28:39 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/13 22:02:38 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,17 @@ t_vec3	ray_trace(t_scene scene, t_ray ray)
 	return (color);
 }
 
-void	_draw(t_scene scene)
+void	_draw(t_scene scene, t_vec2 start, t_vec2 end)
 {
 	t_ray	ray;
 	t_vec3	color;
 	t_vec2	pixel;
 
-	pixel.y = 0;
-	while (pixel.y < HEIGHT)
+	pixel.y = start.y;
+	while (pixel.y < end.y)
 	{
-		pixel.x = 0;
-		while  (pixel.x < WIDTH)
+		pixel.x = start.x;
+		while  (pixel.x < end.x)
 		{
 			ray = ray_new(pixel, scene.camera, scene.option.matrix);
 			color = ray_trace(scene, ray);
@@ -86,8 +86,50 @@ void	_draw(t_scene scene)
 	}
 }
 
+#include <pthread.h>
+
+struct s_thread
+{
+	t_scene	*scene;
+	int		i;
+};
+
+typedef struct s_thread	t_thread;
+
+#define TH_KERL	4
+
+void	*lol(void *pointer)
+{
+	t_thread	kek;
+	t_scene		scene;
+	int			i;
+
+	kek = *(t_thread *)pointer;
+	scene = *kek.scene;
+	i = kek.i;
+	_draw(scene, vec2_new(WIDTH / TH_KERL * i, 0), vec2_new(WIDTH / TH_KERL * (i + 1), HEIGHT));
+	return (NULL);
+}
+
 void	draw(t_scene scene)
 {
-	_draw(scene);
+	pthread_t	thread[TH_KERL];
+	t_thread	kek[TH_KERL];
+	int			i;
+
+	i = 0;
+	while (i < TH_KERL)
+	{
+		kek[i].i = i;
+		kek[i].scene = &scene;
+		pthread_create(&thread[i], NULL, lol, &kek[i]);
+		i += 1;
+	}
+	i = 0;
+	while (i < TH_KERL)
+	{
+		pthread_join(thread[i], NULL);
+		i += 1;
+	}
 	mlx_put_image_to_window(scene.mlx.mlx, scene.mlx.win, scene.mlx.canvas, 0, 0);
 }
