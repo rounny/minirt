@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 20:36:40 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/12 07:53:23 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/14 11:13:33 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static void	movement(t_key key, t_vec3 *direction)
 static void	check_fov(t_key key, float *change)
 {
 	if (key == KEY_PLUS)
-		*change -= +0.5;
-	else if (key == KEY_MINUS)
 		*change -= -0.5;
+	else if (key == KEY_MINUS)
+		*change -= +0.5;
 	else
 		return ;
 }

@@ -27,6 +27,7 @@
 		"mouse.h": "c",
 		"__node_handle": "c",
 		"chrono": "c",
-		"variant": "c"
+		"variant": "c",
+		"__bit_reference": "c"
 	}
 }

@@ -6,7 +6,7 @@
 #    By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 04:12:14 by ccamie            #+#    #+#              #
-#    Updated: 2022/07/13 13:34:37 by ccamie           ###   ########.fr        #
+#    Updated: 2022/07/14 11:09:20 by ccamie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CC			=	cc
 CPPFLAGS	=	-I include
 CPPFLAGS	+=	-Wall -Wextra -Werror
 
-# CPPFLAGS	+=	-O2
+CPPFLAGS	+=	-O2
 
 # CPPFLAGS	+=	-g
 
@@ -112,6 +112,7 @@ FUNCTIONS	+=	$(addprefix ray/,		\
 FUNCTIONS	+=	$(addprefix utils/,		\
 				color_trim.c			\
 				matrix_rotate.c			\
+				matrix_scale.c			\
 				maxf.c					\
 				minf.c					\
 				vec3_mulmat.c			\

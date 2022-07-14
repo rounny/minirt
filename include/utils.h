@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:53:37 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/09 12:21:21 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/14 10:56:47 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	matrix_rotate(t_mat matrix, t_vec3 angle);
 float	maxf(float a, float b);
 float	minf(float a, float b);
 t_vec3	vec3_mulmat(t_vec3 vec, t_mat matrix);
+void	matrix_scale(t_mat matrix, t_vec3 scale);
 t_vec3	vec3_mulmat_xy(t_vec3 vec, t_mat matrix);
 
 #endif // UTILS_H

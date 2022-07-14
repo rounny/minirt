@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:19 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/12 08:11:10 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/14 10:43:56 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	set_options(t_scene *scene)
 	matrix_new(scene->option.matrix);
 	matrix_rotate(scene->option.matrix, scene->camera.rotation);
 	scene->option.smooth = FALSE;
-	scene->option.block = 1;
+	scene->option.block = 2;
 	scene->press.key.direction = vec3_newv(0.0);
 	scene->press.key.action = FALSE;
 	scene->press.mouse.action = FALSE;

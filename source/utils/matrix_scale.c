@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new.c                                              :+:      :+:    :+:   */
+/*   scale.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 16:40:14 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/14 11:13:07 by ccamie           ###   ########.fr       */
+/*   Created: 2022/07/14 10:53:09 by ccamie            #+#    #+#             */
+/*   Updated: 2022/07/14 10:56:10 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ray.h"
+#include "minirt.h"
 
-t_ray	ray_new(t_vec2 pixel, t_cam camera, t_mat matrix)
+void	matrix_scale(t_mat matrix, t_vec3 scale)
 {
-	t_ray	ray;
+	t_mat	_scale;
 
-	ray.origin = camera.location;
-	pixel.x -= WIDTH / 2.0;
-	pixel.y -= HEIGHT / 2.0;
-	ray.direction = vec3_new(camera.focus, pixel.x, pixel.y);
-	ray.direction = vec3_mulmat(ray.direction, matrix);
-	ray.direction = vec3_norm(ray.direction);
-	return (ray);
+	matrix_column(_scale[0], scale.x, 0.0, 0.0);
+	matrix_column(_scale[1], 0.0, scale.y, 0.0);
+	matrix_column(_scale[2], 0.0, 0.0, scale.z);
+	matrix_multiply(matrix, _scale);
 }
