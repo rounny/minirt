@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:40 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/14 11:11:41 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/14 14:55:48 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ t_vec3	ray_cast(t_scene scene, t_ray ray)
 	}
 
 	t_vec3	color;
-	// t_vec3	normal;
 
-	// color = vec3_newv(-1.0);
 	if (time.type == SPHERE)
 	{
 		color = scene.sphere[time.index].color;
@@ -49,20 +47,34 @@ t_vec3	ray_cast(t_scene scene, t_ray ray)
 			return (vec3_new(0.0, 0.0, 1.0));
 		}
 	}
-	// normal = vec3_norm(vec3_add(vec3_sub(ray.origin, scene.sphere[time.index].location), vec3_mulv(ray.direction, time.time)));
+	t_vec3	normal;
+
+	normal = vec3_add(vec3_sub(ray.origin, scene.sphere[time.index].location), vec3_mulv(ray.direction, time.time));
+	normal = vec3_norm(normal);
+
+	t_ray	light;
+
+	light.direction = vec3_sub(scene.light.location, ray_pos(ray, time.time));
+	light.direction = vec3_norm(light.direction);
+
+	color = vec3_sub(color, vec3_mulv(color, vec3_dot(normal, light.direction))) ;
 	return (color);
 }
 
 t_vec3	ray_trace(t_scene scene, t_ray ray)
 {
 	t_vec3	color;
+	t_vec3	allcolor;
 
+	allcolor = vec3_mulv(scene.ambient.color, scene.ambient.lighting);
 	color = ray_cast(scene, ray);
 	if (color.x == -1.0 && color.y == -1.0 && color.z == -1.0)
 	{
 		return (vec3_new(0.1333, 0.1137, 0.1586));
 	}
-	return (color);
+	color = color_trim(color);
+	allcolor = vec3_mul(allcolor, color);
+	return (allcolor);
 }
 
 void	_draw(t_scene scene)
