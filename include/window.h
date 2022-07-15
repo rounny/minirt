@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 12:36:04 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/15 08:57:01 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/15 11:24:10 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // # define WIDTH	1920
 // # define HEIGHT	1080
 
-# define WIDTH	1080 / 8
+# define WIDTH	1080
 # define HEIGHT	720
 
 // # define WIDTH	540

@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:19 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/12 08:11:10 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/15 11:24:02 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_view	set_view(void *canvas)
 
 void	set_options(t_scene *scene)
 {
-	scene->camera.rotation = vec3_new(0.0, 26.0, 152.0);
+	scene->camera.rotation = vec3_new(0.0, 26.0, 252.0);
 	matrix_new(scene->option.matrix);
 	matrix_rotate(scene->option.matrix, scene->camera.rotation);
 	scene->option.smooth = FALSE;

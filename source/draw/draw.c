@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:40 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/15 08:57:09 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/15 11:24:06 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,14 +97,14 @@ struct s_thread
 
 typedef struct s_thread	t_thread;
 
-#define TH_KERL	1
+#define TH_KERL	8
 
 
 void	*lol(void *pointer)
 {
 	t_thread	kek;
-struct timeval	temp;
-long			time1;
+	struct timeval	temp;
+	long			time1;
 	t_scene		scene;
 	int			i;
 	struct timeval	temp2;
@@ -124,19 +124,30 @@ long			time1;
 
 void	draw(t_scene scene)
 {
-	pthread_t	thread[TH_KERL];
-	t_thread	kek[TH_KERL];
+	pthread_t			thread[TH_KERL];
+	pthread_attr_t		tattr;
+	t_thread			kek[TH_KERL];
+	struct sched_param	param;
 	int			i;
 
+		// pthread_attr_getschedparam();
 	i = 0;
+	pthread_attr_init(&tattr);
+	pthread_attr_setscope(&tattr, PTHREAD_SCOPE_PROCESS);
+	pthread_attr_setdetachstate(&tattr, PTHREAD_CREATE_JOINABLE);
+	pthread_attr_setinheritsched(&tattr, PTHREAD_EXPLICIT_SCHED);
+	pthread_attr_setschedpolicy(&tattr, SCHED_OTHER);
+	param.sched_priority = 1000000;
+	pthread_attr_setschedparam(&tattr, &param);
 	while (i < TH_KERL)
 	{
 		kek[i].i = i;
 		kek[i].scene = &scene;
-		pthread_create(&thread[i], NULL, lol, &kek[i]);
-		// pthread_attr_getschedparam();
+		
+		pthread_create(&thread[i], &tattr, lol, &kek[i]);
 		i += 1;
 	}
+	pthread_attr_destroy(&tattr);
 	i = 0;
 	while (i < TH_KERL)
 	{

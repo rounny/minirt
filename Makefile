@@ -6,7 +6,7 @@
 #    By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 04:12:14 by ccamie            #+#    #+#              #
-#    Updated: 2022/07/15 08:57:15 by ccamie           ###   ########.fr        #
+#    Updated: 2022/07/15 11:24:04 by ccamie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CC			=	cc
 
 CPPFLAGS	=	-I include
 # CPPFLAGS	+=	-Wall -Wextra -Werror
-CPPFLAGS	+=	-pthread
+# CPPFLAGS	+=	-pthread
 
 CPPFLAGS	+=	-O2
 # CPPFLAGS	+=	-g
