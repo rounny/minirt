@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 07:53:42 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/12 08:00:00 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/15 08:57:13 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	thread_for_draw(t_scene *scene)
 	}
 	if (drawit == TRUE)
 	{
-		draw(*scene);
 	}
+		draw(*scene);
 	return (0);
 }

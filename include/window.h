@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 12:36:04 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/11 18:22:17 by lemmon           ###   ########.fr       */
+/*   Updated: 2022/07/15 08:57:01 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,13 @@
 // # define WIDTH	1920
 // # define HEIGHT	1080
 
-# define WIDTH	1080
+# define WIDTH	1080 / 8
 # define HEIGHT	720
+
+// # define WIDTH	540
+// # define HEIGHT	360
+
+// # define WIDTH	200
+// # define HEIGHT	100
 
 #endif // WINDOW_H

@@ -6,7 +6,7 @@
 #    By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 04:12:14 by ccamie            #+#    #+#              #
-#    Updated: 2022/07/14 15:10:26 by ccamie           ###   ########.fr        #
+#    Updated: 2022/07/15 08:57:15 by ccamie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,13 @@ NAME		=	minirt
 CC			=	cc
 
 CPPFLAGS	=	-I include
-CPPFLAGS	+=	-Wall -Wextra -Werror
+# CPPFLAGS	+=	-Wall -Wextra -Werror
+CPPFLAGS	+=	-pthread
 
 CPPFLAGS	+=	-O2
-
 # CPPFLAGS	+=	-g
 
-CFLAGS		=	-framework OpenGL -framework AppKit libmlx/libmlx.a
+CFLAGS		=	-framework OpenGL -framework AppKit libmlx/libmlx.a -pthread -O2
 
 # CFLAGS		+=	-fsanitize=address
 # CFLAGS		+=	-fsanitize=undefined

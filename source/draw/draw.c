@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:40 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/14 19:33:20 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/15 08:57:09 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ struct s_thread
 
 typedef struct s_thread	t_thread;
 
-#define TH_KERL	8
+#define TH_KERL	1
 
 
 void	*lol(void *pointer)
@@ -129,19 +129,20 @@ void	draw(t_scene scene)
 	int			i;
 
 	i = 0;
-	// while (i < TH_KERL)
+	while (i < TH_KERL)
 	{
 		kek[i].i = i;
 		kek[i].scene = &scene;
 		pthread_create(&thread[i], NULL, lol, &kek[i]);
+		// pthread_attr_getschedparam();
 		i += 1;
 	}
-	// i = 0;
-	// while (i < TH_KERL)
-	// {
+	i = 0;
+	while (i < TH_KERL)
+	{
 		pthread_join(thread[i], NULL);
-		// i += 1;
-	// }
+		i += 1;
+	}
 	printf("-----\n");
 	mlx_put_image_to_window(scene.mlx.mlx, scene.mlx.win, scene.mlx.canvas, 0, 0);
 }
