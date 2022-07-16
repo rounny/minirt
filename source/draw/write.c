@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:46 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/12 08:23:46 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/17 02:30:27 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	write_pixel(t_view view, t_vec2 pixel, t_vec3 color)
 		printf("\a\x1b[41m\x1b[1m 💥 BOOM 💥 \x1b[0m\n");
 		exit(1);
 	}
+	// pixel.x = WIDTH - pixel.x;
+	// pixel.y = HEIGHT - pixel.y;
 	buffer = (unsigned char *)view.buffer;
 	_pixel = (pixel.y * view.line) + (pixel.x * 4);
 	buffer[_pixel + 0] = color.z * 255;

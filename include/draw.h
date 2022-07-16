@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:20:58 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/13 12:00:43 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/16 23:31:57 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 struct s_time
 {
-	int		time;
+	float	time;
 	t_type	type;
 	int		index;
 };

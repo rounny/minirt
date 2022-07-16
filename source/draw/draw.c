@@ -6,11 +6,38 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:40 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/14 14:55:48 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/17 02:26:54 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
+
+t_bool	is_path_free(t_scene scene, t_ray ray, t_vec3 light)
+{
+	t_time	time;
+	t_vec3	at;
+	float	t;
+
+	time.index = -1;
+	time.time = __INT_MAX__;
+	hit_sphere(&time, ray, scene.sphere, scene.count.sphere);
+	at = vec3_div(vec3_sub(light, ray.origin), ray.direction);
+	t = at.y;
+	// // t = vec3_len(at);
+	if (time.time < 0.0 || time.time > t)
+	{
+		return (TRUE);
+	}
+	else 
+	{
+		return (FALSE);
+	}
+}
+
+t_vec3	reflect(t_vec3 rd, t_vec3 n)
+{
+	return (vec3_sub(rd, vec3_mulv(vec3_mulv(n, vec3_dot(n, rd)), 2.0)));
+}
 
 t_vec3	ray_cast(t_scene scene, t_ray ray)
 {
@@ -18,8 +45,8 @@ t_vec3	ray_cast(t_scene scene, t_ray ray)
 
 	time.index = -1;
 	time.time = __INT_MAX__;
-	hit_sphere(&time, ray, scene.sphere, scene.count.sphere);
 	hit_axes(&time, scene, ray);
+	hit_sphere(&time, ray, scene.sphere, scene.count.sphere);
 
 	if (time.index == -1)
 	{
@@ -36,45 +63,60 @@ t_vec3	ray_cast(t_scene scene, t_ray ray)
 	{
 		if (time.index == 0)
 		{
-			return (vec3_new(1.0, 0.0, 0.0));
+			return (vec3_new(0.8, 0.2, 0.2));
 		}
 		if (time.index == 1)
 		{
-			return (vec3_new(0.0, 1.0, 0.0));
+			return (vec3_new(0.2, 0.8, 0.2));
 		}
 		if (time.index == 2)
 		{
-			return (vec3_new(0.0, 0.0, 1.0));
+			return (vec3_new(0.2, 0.2, 0.8));
 		}
 	}
+
+	t_ray	newray;
+
+	newray.origin = ray_pos(ray, time.time);
+	newray.direction = vec3_norm(vec3_sub(scene.light.location, newray.origin));
+
+	if (is_path_free(scene, newray, scene.light.location) == FALSE)
+	{	
+		color = vec3_mul(color, vec3_mulv(scene.ambient.color, scene.ambient.lighting));
+		return (color);
+	}
+
 	t_vec3	normal;
+	t_vec3	diffuse;
+	t_vec3	reflected;
+	t_vec3	specular;
 
-	normal = vec3_add(vec3_sub(ray.origin, scene.sphere[time.index].location), vec3_mulv(ray.direction, time.time));
-	normal = vec3_norm(normal);
+	normal = vec3_norm(vec3_add(vec3_sub(ray.origin, scene.sphere[time.index].location), vec3_mulv(ray.direction, time.time)));
 
-	t_ray	light;
+	reflected = reflect(ray.direction, normal);
+	reflected = vec3_mapv(vec3_mulv(scene.light.color, vec3_dot(newray.direction, reflected)), 0.0, maxf);
+	specular = vec3_mapv(reflected, 16.0, powf);
+	diffuse = vec3_mapv(vec3_mulv(scene.light.color, vec3_dot(newray.direction, normal)), 0.0, maxf);
+	color = vec3_mulv(vec3_mul(color, diffuse), scene.light.intensity);
+	color = vec3_add(color, specular);
+	color = vec3_add(color, vec3_mul(color, specular));
 
-	light.direction = vec3_sub(scene.light.location, ray_pos(ray, time.time));
-	light.direction = vec3_norm(light.direction);
+	color = vec3_add(color, vec3_mul(scene.sphere[time.index].color, vec3_mulv(scene.ambient.color, scene.ambient.lighting)));
 
-	color = vec3_sub(color, vec3_mulv(color, vec3_dot(normal, light.direction))) ;
 	return (color);
 }
 
 t_vec3	ray_trace(t_scene scene, t_ray ray)
 {
 	t_vec3	color;
-	t_vec3	allcolor;
 
-	allcolor = vec3_mulv(scene.ambient.color, scene.ambient.lighting);
 	color = ray_cast(scene, ray);
 	if (color.x == -1.0 && color.y == -1.0 && color.z == -1.0)
 	{
 		return (vec3_new(0.1333, 0.1137, 0.1586));
 	}
 	color = color_trim(color);
-	allcolor = vec3_mul(allcolor, color);
-	return (allcolor);
+	return (color);
 }
 
 void	_draw(t_scene scene)
