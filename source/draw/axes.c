@@ -6,13 +6,13 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 11:59:54 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/13 13:28:53 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/17 15:42:59 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-float	red(t_ray ray, t_vec3 origin)
+static float	red(t_ray ray, t_vec3 origin)
 {
 	t_vec3	t;
 

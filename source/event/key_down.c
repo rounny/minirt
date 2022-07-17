@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 16:31:58 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/14 11:52:51 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/17 16:21:17 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,46 @@ static void	check_smooth(t_key key, int *smooth)
 		return ;
 }
 
+static float	axes_x(t_ray ray, t_vec3 origin)
+{
+	t_vec3	t;
+
+	t.y = (origin.y - ray.origin.y) / ray.direction.y;
+	t.z = (origin.z - ray.origin.z) / ray.direction.z;
+	t.x = ray.origin.x + ray.direction.x * t.z;
+	return (t.x);
+}
+
+float	axes_y(t_ray ray, t_vec3 origin)
+{
+	t_vec3	t;
+
+	t.x = (origin.x - ray.origin.x) / ray.direction.x;
+	t.z = (origin.z - ray.origin.z) / ray.direction.z;
+	t.y = ray.origin.y + ray.direction.y * t.z;
+	return (t.y);
+}
+
+float	axes_z(t_ray ray, t_vec3 origin)
+{
+	t_vec3	t;
+
+	t.x = (origin.x - ray.origin.x) / ray.direction.x;
+	t.y = (origin.y - ray.origin.y) / ray.direction.y;
+	t.z = ray.origin.z + ray.direction.z * t.x;
+	return (t.z);
+}
+
 int	mouse_axes_x(int x, int y, t_scene *scene)
 {
 	t_sphere	*sphere;
+	t_ray		ray;
+	t_vec2		pixel;
 
 	sphere = (t_sphere *)scene->object.target;
-	// t_ray	ray;
-	// t_vec2	pixel;
-
-	// pixel = scene->press.mouse.vector;
-	// ray = ray_new(pixel, scene->camera, scene->option.matrix);
-	sphere->location.x += (x - scene->press.mouse.vector.x) * 0.1;
-	sphere->location.x += (y - scene->press.mouse.vector.y) * 0.1;	
+	pixel = scene->press.mouse.vector;
+	ray = ray_new(pixel, scene->camera, scene->option.matrix);
+	sphere->location.x = axes_x(ray, sphere->location);;
 	scene->press.mouse.vector = vec2_new(x, y);
 	scene->press.mouse.action = TRUE;
 	return (0);
@@ -93,10 +121,13 @@ int	mouse_axes_x(int x, int y, t_scene *scene)
 int	mouse_axes_y(int x, int y, t_scene *scene)
 {
 	t_sphere	*sphere;
+	t_ray		ray;
+	t_vec2		pixel;
 
 	sphere = (t_sphere *)scene->object.target;
-	sphere->location.y += (x - scene->press.mouse.vector.x) * 0.1;
-	sphere->location.y += (y - scene->press.mouse.vector.y) * 0.1;
+	pixel = scene->press.mouse.vector;
+	ray = ray_new(pixel, scene->camera, scene->option.matrix);
+	sphere->location.y = axes_y(ray, sphere->location);;
 	scene->press.mouse.vector = vec2_new(x, y);
 	scene->press.mouse.action = TRUE;
 	return (0);
@@ -105,10 +136,13 @@ int	mouse_axes_y(int x, int y, t_scene *scene)
 int	mouse_axes_z(int x, int y, t_scene *scene)
 {
 	t_sphere	*sphere;
+	t_ray		ray;
+	t_vec2		pixel;
 
 	sphere = (t_sphere *)scene->object.target;
-	sphere->location.z += (x - scene->press.mouse.vector.x) * 0.1;
-	sphere->location.z += (y - scene->press.mouse.vector.y) * 0.1;
+	pixel = scene->press.mouse.vector;
+	ray = ray_new(pixel, scene->camera, scene->option.matrix);
+	sphere->location.z = axes_z(ray, sphere->location);;
 	scene->press.mouse.vector = vec2_new(x, y);
 	scene->press.mouse.action = TRUE;
 	return (0);
