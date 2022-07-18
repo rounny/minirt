@@ -6,7 +6,7 @@
 /*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:41:24 by lemmon            #+#    #+#             */
-/*   Updated: 2022/07/11 18:46:43 by lemmon           ###   ########.fr       */
+/*   Updated: 2022/07/18 14:27:49 by lemmon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void	count_separator(char *str, int *i, int *sep);
 int		ft_atoi(const char *str);
 float	ft_atof(char *str, int *i);
 //parsing
-void	parsing(t_scene *scene);
-void	parse_objects(char **line, t_scene *scene, t_count *count);
-void	create_objects(t_count count, t_scene *scene);
-void	parse_count_objects(char *line, t_count *count);
-void	parse_options(char *line, t_scene *scene);
+// void	parsing(t_scene *scene);
+// void	parse_objects(char **line, t_scene *scene, t_count *count);
+// void	create_objects(t_count count, t_scene *scene);
+// void	parse_count_objects(char *line, t_count *count);
+// void	parse_options(char *line, t_scene *scene);
 //get_line_file
 char	**get_line_file(int fd, t_scene *scene);
 //split_rt
@@ -58,5 +58,13 @@ void	parse_light(char *str, t_scene *scene);
 t_vec3	parsing_color(char *str, int i, t_scene *scene);
 void	parse_plane(char *str, t_pln *plane, t_scene *scene);
 void	parse_sphere(char *str, t_sphere *sphere, t_scene *scene);
+
+//parsing_bonus
+void	parsing_bonus(t_scene *scene);
+void	parse_light_bonus(char *str, t_light *light, t_scene *scene);
+// void	parse_objects_bonus(char **line, t_scene *scene, t_count *count);
+// void	create_objects_bonus(t_count count, t_scene *scene);
+// void	parse_count_objects_bonus(char *line, t_count *count);
+// void	parse_options_bonus(char *line, t_scene *scene);
 
 #endif // PARSER_H

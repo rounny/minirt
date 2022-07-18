@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:19 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/17 00:13:47 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/18 14:27:59 by lemmon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	minirt(char *path)
 
 	scene = (t_scene){};
 	check_open(path, &scene);
-	parsing(&scene);
+	parsing_bonus(&scene);
 	set_options(&scene);
 	scene.mlx = set_mlx();
 	scene.view = set_view(scene.mlx.canvas);

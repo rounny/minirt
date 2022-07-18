@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 12:15:04 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/13 11:19:33 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/18 14:33:18 by lemmon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ struct s_count
 	int	i_pln;
 	int	cylinder;
 	int	i_clnd;
+	int	light;
+	int	i_lgt;
 };
 
 struct s_object
@@ -161,7 +163,7 @@ struct s_scene
 	struct s_cam	camera;
 	struct s_count	count;
 	struct s_amb	ambient;
-	struct s_light	light;
+	struct s_light	*light;
 	struct s_sphere	*sphere;
 	struct s_pln	*plane;
 	struct s_clnd	*cylinder;

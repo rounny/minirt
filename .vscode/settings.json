@@ -29,5 +29,6 @@
 		"chrono": "c",
 		"variant": "c",
 		"__bit_reference": "c"
-	}
+	},
+	"C_Cpp.errorSquiggles": "Disabled"
 }

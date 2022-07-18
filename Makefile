@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+         #
+#    By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 04:12:14 by ccamie            #+#    #+#              #
-#    Updated: 2022/07/16 23:21:04 by ccamie           ###   ########.fr        #
+#    Updated: 2022/07/18 14:28:51 by lemmon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,13 +87,13 @@ FUNCTIONS	+=	$(addprefix matrix/,	\
 				)
 
 FUNCTIONS	+=	$(addprefix parser/,	\
-				parser_main.c			\
+				parser_main_bonus.c		\
 				get_line_file.c			\
 				check_file.c 			\
 				check_elements.c		\
 				ambient_lightning.c		\
 				camera.c				\
-				light.c					\
+				light_bonus.c			\
 				utils_atof_atoi.c		\
 				utils.c					\
 				parser_color.c			\

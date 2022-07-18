@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_main.c                                      :+:      :+:    :+:   */
+/*   parser_main_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/11 15:10:06 by lemmon            #+#    #+#             */
-/*   Updated: 2022/07/18 13:47:20 by lemmon           ###   ########.fr       */
+/*   Created: 2022/07/18 13:29:22 by lemmon            #+#    #+#             */
+/*   Updated: 2022/07/18 14:31:51 by lemmon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static void	parse_options(char *line, t_scene *scene)
+static void	parse_options_bonus(char *line, t_scene *scene)
 {
 	int	i;
 
@@ -21,11 +21,11 @@ static void	parse_options(char *line, t_scene *scene)
 		parse_ambient_lightning(line + 1, scene);
 	else if (line[i] == 'C')
 		parse_camera(line + 1, scene);
-	else if (line[i] == 'L')
-		parse_light(line + 1, scene);
+	// else if (line[i] == 'L')
+	// 	parse_light(line + 1, scene);
 }
 
-static void	parse_count_objects(char *line, t_count *count)
+static void	parse_count_objects_bonus(char *line, t_count *count)
 {
 	int	i;
 
@@ -36,9 +36,12 @@ static void	parse_count_objects(char *line, t_count *count)
 		++count->plane;
 	else if (line[i] == 'c' && line[i + 1] == 'y')
 		++count->cylinder;
+	else if (line[i] == 'L')
+		++count->light;
+		
 }
 
-static void	create_objects(t_count count, t_scene *scene)
+static void	create_objects_bonus(t_count count, t_scene *scene)
 {
 	if (count.sphere)
 	{
@@ -58,14 +61,20 @@ static void	create_objects(t_count count, t_scene *scene)
 		if (!scene->cylinder)
 			ft_error("malloc error");
 	}
+	if (count.light)
+	{
+		scene->light = malloc(sizeof(t_light) * count.light);
+		if (!scene->light)
+			ft_error("malloc error");
+	}
 }
 
-static void	parse_objects(char **line, t_scene *scene, t_count *count)
+static void	parse_objects_bonus(char **line, t_scene *scene, t_count *count)
 {
 	int	i;
 
 	i = -1;
-	create_objects(*count, scene);
+	create_objects_bonus(*count, scene);
 	while (++i < scene->count_line)
 	{
 		if (line[i][0] == 's' && line[i][1] == 'p')
@@ -83,10 +92,15 @@ static void	parse_objects(char **line, t_scene *scene, t_count *count)
 			parse_cylinder(line[i] + 2, &scene->cylinder[count->i_clnd], scene);
 			++count->i_clnd;
 		}
+		else if (line[i][0] == 'L')
+		{
+			parse_light_bonus(line[i] + 1, &scene->light[count->i_lgt], scene);
+			++count->i_lgt;
+		}
 	}
 }
 
-void	parsing(t_scene *scene)
+void	parsing_bonus(t_scene *scene)
 {
 	t_count	count;
 	char	**line;
@@ -98,15 +112,16 @@ void	parsing(t_scene *scene)
 	while (++i < scene->count_line)
 	{
 		scene->count_argc = 0;
-		if (line[i][0] == 'A' || line[i][0] == 'C' || line[i][0] == 'L')
-			parse_options(line[i], scene);
-		else if ((line[i][0] == 's' && line[i][1] == 'p')
+		if (line[i][0] == 'A' || line[i][0] == 'C')
+			parse_options_bonus(line[i], scene);
+		else if ((line[i][0] == 'L')
+				||(line[i][0] == 's' && line[i][1] == 'p')
 				|| (line[i][0] == 'p' && line[i][1] == 'l')
 				|| (line[i][0] == 'c' && line[i][1] == 'y'))
-			parse_count_objects(line[i], &count);
+			parse_count_objects_bonus(line[i], &count);
 		else
 			ft_error("invalid content of file");
 	}
-	parse_objects(line, scene, &count);
+	parse_objects_bonus(line, scene, &count);
 	scene->count = count;
 }
