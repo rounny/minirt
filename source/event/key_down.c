@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 16:31:58 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/17 16:21:17 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/07/18 15:45:53 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,10 @@ int	key_down(t_key key, t_scene *scene)
 	scene->press.key.code = key;
 	if (key == KEY_X)
 	{
+		if (scene->object.type == NIL)
+		{
+			return (0);
+		}
 		scene->object.x = TRUE;
 		scene->object.y = FALSE;
 		scene->object.z = FALSE;
@@ -184,6 +188,10 @@ int	key_down(t_key key, t_scene *scene)
 	}
 	if (key == KEY_Y)
 	{
+		if (scene->object.type == NIL)
+		{
+			return (0);
+		}
 		scene->object.x = FALSE;
 		scene->object.y = TRUE;
 		scene->object.z = FALSE;
@@ -191,6 +199,10 @@ int	key_down(t_key key, t_scene *scene)
 	}
 	if (key == KEY_Z)
 	{
+		if (scene->object.type == NIL)
+		{
+			return (0);
+		}
 		scene->object.x = FALSE;
 		scene->object.y = FALSE;
 		scene->object.z = TRUE;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+         #
+#    By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 04:12:14 by ccamie            #+#    #+#              #
-#    Updated: 2022/07/18 14:28:51 by lemmon           ###   ########.fr        #
+#    Updated: 2022/07/18 15:46:52 by ccamie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CPPFLAGS	+=	-Wall -Wextra -Werror
 
 CPPFLAGS	+=	-O2
 
-# CPPFLAGS	+=	-g
+CPPFLAGS	+=	-g
 
 CFLAGS		=	-framework OpenGL -framework AppKit libmlx/libmlx.a
 
