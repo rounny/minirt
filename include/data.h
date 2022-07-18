@@ -6,7 +6,7 @@
 /*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 12:15:04 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/18 14:33:18 by lemmon           ###   ########.fr       */
+/*   Updated: 2022/07/18 18:03:53 by lemmon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,24 @@
 # include "vec2.h"
 # include "vec3.h"
 
+typedef struct s_amb	t_amb;
+typedef struct s_view	t_view;
+typedef struct s_mlx	t_mlx;
+typedef struct s_cam	t_cam;
+typedef struct s_count	t_count;
+typedef struct s_pln	t_pln;
+typedef struct s_sphere	t_sphere;
+typedef struct s_clnd	t_clnd;
+typedef struct s_light	t_light;
+typedef struct s_object	t_object;
+typedef struct s_option	t_option;
+typedef struct s_keybrd	t_keybrd;
+typedef struct s_mouse	t_mouse;
+typedef struct s_press	t_press;
+typedef struct s_scene	t_scene;
+typedef int				t_type;
+typedef int				t_key;
+
 enum e_type
 {
 	NIL,
@@ -26,9 +44,6 @@ enum e_type
 	PLANE,
 	CYLINDER,
 };
-
-typedef int	t_type;
-typedef int	t_key;
 
 struct s_view
 {
@@ -45,16 +60,16 @@ struct s_mlx
 	void	*canvas;
 };
 
-struct s_amb // полное название
+struct s_amb
 {	
 	t_vec3	color;
 	float	lighting;
-	int		flag_A;
+	int		flag_amb;
 };
 
 struct s_cam
 {
-	int		flag_C;
+	int		flag_cam;
 	t_vec3	location;
 	t_vec3	rotation;
 	float	fov;
@@ -63,7 +78,6 @@ struct s_cam
 
 struct s_light
 {
-	int		flag_L;
 	t_vec3	location;
 	t_vec3	color;
 	float	intensity;
@@ -101,7 +115,7 @@ struct s_clnd
 
 struct s_count
 {
-	int sphere;
+	int	sphere;
 	int	i_sph;
 	int	plane;
 	int	i_pln;
@@ -154,7 +168,7 @@ struct s_option
 
 struct s_scene
 {
-	int 			fd;
+	int				fd;
 	int				count_argc;
 	int				count_line;
 	int				flag_line;
@@ -171,21 +185,5 @@ struct s_scene
 	struct s_press	press;
 	struct s_option	option;
 };
-
-typedef struct s_amb	t_amb;
-typedef struct s_view	t_view;
-typedef struct s_mlx	t_mlx;
-typedef struct s_cam	t_cam;
-typedef struct s_count	t_count;
-typedef struct s_pln	t_pln;
-typedef struct s_sphere	t_sphere;
-typedef struct s_clnd	t_clnd;
-typedef struct s_light	t_light;
-typedef struct s_object	t_object;
-typedef struct s_option	t_option;
-typedef struct s_keybrd	t_keybrd;
-typedef struct s_mouse	t_mouse;
-typedef struct s_press	t_press;
-typedef struct s_scene	t_scene;
 
 #endif // DATA_H

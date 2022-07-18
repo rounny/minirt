@@ -6,7 +6,7 @@
 /*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 14:43:39 by lemmon            #+#    #+#             */
-/*   Updated: 2022/07/11 15:53:45 by lemmon           ###   ########.fr       */
+/*   Updated: 2022/07/18 17:54:31 by lemmon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	parse_camera(char *str, t_scene *scene)
 	int	i;
 
 	i = 0;
-	if (scene->camera.flag_C == 0)
-		scene->camera.flag_C = 1;
+	if (scene->camera.flag_cam == 0)
+		scene->camera.flag_cam = 1;
 	else
 		ft_error("dublicate of sceneions");
 	check_next_element(str, i);

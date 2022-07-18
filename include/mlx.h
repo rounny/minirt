@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/18 18:04:23 by lemmon            #+#    #+#             */
+/*   Updated: 2022/07/18 18:05:15 by lemmon           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*
 ** mlx.h for MinilibX in 
 ** 
@@ -11,7 +23,6 @@
 /*
 **   MinilibX -  Please report bugs
 */
-
 
 /*
 ** FR msg - FR msg - FR msg
@@ -41,11 +52,9 @@
 ** c'est normalement le cas.
 */
 
-
 #ifndef MLX_H
 
-#define	MLX_H
-
+# define MLX_H
 
 void	*mlx_init();
 /*
