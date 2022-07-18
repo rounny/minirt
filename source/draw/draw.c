@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:40 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/18 14:34:40 by lemmon           ###   ########.fr       */
+/*   Updated: 2022/07/18 15:09:39 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,34 +76,46 @@ t_vec3	ray_cast(t_scene scene, t_ray ray)
 	}
 
 	t_ray	newray;
+	int		i;
 
-	newray.origin = ray_pos(ray, time.time);
-	newray.direction = vec3_norm(vec3_sub(scene.light.location, newray.origin));
+	i = 0;
 
-	if (is_path_free(scene, newray, scene.light.location) == FALSE)
-	{	
-		color = vec3_mul(color, vec3_mulv(scene.ambient.color, scene.ambient.lighting));
-		return (color);
+	t_vec3	allcolor;
+
+	allcolor = vec3_newv(0.0);
+	allcolor = vec3_add(allcolor, vec3_mul(scene.sphere[time.index].color, vec3_mulv(scene.ambient.color, scene.ambient.lighting)));
+	while (i < scene.count.light)
+	{
+		color = scene.sphere[time.index].color;
+		newray.origin = ray_pos(ray, time.time);
+		newray.direction = vec3_norm(vec3_sub(scene.light[i].location, newray.origin));
+
+		if (is_path_free(scene, newray, scene.light[i].location) == FALSE)
+		{	
+			i += 1;
+			continue;
+		}
+
+		t_vec3	normal;
+		t_vec3	diffuse;
+		t_vec3	reflected;
+		t_vec3	specular;
+
+		normal = vec3_norm(vec3_add(vec3_sub(ray.origin, scene.sphere[time.index].location), vec3_mulv(ray.direction, time.time)));
+
+		reflected = reflect(ray.direction, normal);
+		reflected = vec3_mapv(vec3_mulv(scene.light[i].color, vec3_dot(newray.direction, reflected)), 0.0, maxf);
+		specular = vec3_mapv(reflected, 16.0, powf);
+		diffuse = vec3_mapv(vec3_mulv(scene.light[i].color, vec3_dot(newray.direction, normal)), 0.0, maxf);
+		color = vec3_mulv(vec3_mul(color, diffuse), scene.light[i].intensity);
+		color = vec3_add(color, specular);
+		color = vec3_add(color, vec3_mul(color, specular));
+
+		allcolor = vec3_add(allcolor, color);
+		i += 1;
 	}
 
-	t_vec3	normal;
-	t_vec3	diffuse;
-	t_vec3	reflected;
-	t_vec3	specular;
-
-	normal = vec3_norm(vec3_add(vec3_sub(ray.origin, scene.sphere[time.index].location), vec3_mulv(ray.direction, time.time)));
-
-	reflected = reflect(ray.direction, normal);
-	reflected = vec3_mapv(vec3_mulv(scene.light.color, vec3_dot(newray.direction, reflected)), 0.0, maxf);
-	specular = vec3_mapv(reflected, 16.0, powf);
-	diffuse = vec3_mapv(vec3_mulv(scene.light.color, vec3_dot(newray.direction, normal)), 0.0, maxf);
-	color = vec3_mulv(vec3_mul(color, diffuse), scene.light.intensity);
-	color = vec3_add(color, specular);
-	color = vec3_add(color, vec3_mul(color, specular));
-
-	color = vec3_add(color, vec3_mul(scene.sphere[time.index].color, vec3_mulv(scene.ambient.color, scene.ambient.lighting)));
-
-	return (color);
+	return (allcolor);
 }
 
 t_vec3	ray_trace(t_scene scene, t_ray ray)

@@ -17,8 +17,8 @@
         },
         {
             "type": "process",
-            "label": "test",
-            "detail": "sphere",
+            "label": "sphere",
+            "detail": "test",
             "command": "${workspaceFolder}/minirt",
             "args": [
                 "${workspaceFolder}/scene/sphere.rt"
@@ -29,7 +29,22 @@
                 "showReuseMessage": false
             },
             "dependsOn": "build",
-        }
+        },
+        {
+            "type": "process",
+            "label": "light",
+            "detail": "test",
+            "command": "${workspaceFolder}/minirt",
+            "args": [
+                "${workspaceFolder}/scene/light.rt"
+            ],
+            "presentation": {
+                "reveal": "silent",
+                "clear": true,
+                "showReuseMessage": false
+            },
+            "dependsOn": "build",
+        },
     ],
     "version": "2.0.0"
 }
