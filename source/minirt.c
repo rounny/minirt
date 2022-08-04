@@ -42,7 +42,7 @@ void	set_options(t_scene *scene)
 	matrix_new(scene->option.matrix);
 	matrix_rotate(scene->option.matrix, scene->camera.rotation);
 	scene->option.smooth = FALSE;
-	scene->option.block = 2;
+	scene->option.block = 4;
 	scene->press.key.direction = vec3_newv(0.0);
 	scene->press.key.action = FALSE;
 	scene->press.mouse.action = FALSE;

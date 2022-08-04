@@ -35,20 +35,12 @@ static int	get_min_index(t_sphere *spheres, int count)
 
 void	hit_sphere(t_time *time, t_ray ray, t_sphere *spheres, int count)
 {
-	// t_ray	new;
-	// t_mat	matrix;
 	int		index;
 	int		i;
 
 	i = 0;
 	while (i < count)
 	{
-		// matrix_new(matrix);
-		// spheres[i].scale = vec3_new(1.0, 2.0, 1.0);
-		// matrix_scale(matrix, spheres[i].scale);
-		// new.direction = vec3_mulmat(ray.direction, matrix);
-		// new.origin = ray.origin;
-		// new.direction = vec3_norm(new.direction);
 		spheres[i].time = draw_sphere(ray, spheres[i].location, \
 													spheres[i].radius);
 		i += 1;

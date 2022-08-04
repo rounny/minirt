@@ -39,6 +39,65 @@ t_vec3	reflect(t_vec3 rd, t_vec3 n)
 	return (vec3_sub(rd, vec3_mulv(vec3_mulv(n, vec3_dot(n, rd)), 2.0)));
 }
 
+// float	draw_plane(t_ray ray, t_vec3 center, t_vec3 vector)
+// {
+// 	(void)vector;
+// 	return (-(vec3_dot(ray.origin, center))) / vec3_dot(ray.direction, center);
+// }
+
+float	draw_plane(t_ray ray, t_vec3 center, t_vec3 vector)
+{
+	// (void)vector;
+	(void)center;
+	return (-(vec3_dot(ray.origin, vector))) / vec3_dot(ray.direction, vector);
+}
+
+static int	get_min_index(t_pln *planes, int count)
+{
+	float	min;
+	int		i;
+	int		index;
+
+	min = __INT_MAX__;
+	index = -1;
+	i = 0;
+	while (i < count)
+	{
+		if (planes[i].time >= 0 && planes[i].time < min)
+		{
+			min = planes[i].time;
+			index = i;
+		}
+		i += 1;
+	}
+	return (index);
+}
+
+void	hit_plane(t_time *time, t_ray ray, t_pln *planes, int count)
+{
+	int		index;
+	int		i;
+
+	i = 0;
+	while (i < count)
+	{
+		planes[i].time = draw_plane(ray, planes[i].location, \
+													planes[i].vector);
+		i += 1;
+	}
+	index = get_min_index(planes, count);
+	if (index == -1)
+	{
+		return ;
+	}
+	if (planes[index].time < time->time)
+	{
+		time->index = index;
+		time->time = planes[index].time;
+		time->type = PLANE;
+	}
+}
+
 t_vec3	ray_cast(t_scene scene, t_ray ray)
 {
 	t_time	time;
@@ -47,19 +106,58 @@ t_vec3	ray_cast(t_scene scene, t_ray ray)
 	time.time = __INT_MAX__;
 	hit_axes(&time, scene, ray);
 	hit_sphere(&time, ray, scene.sphere, scene.count.sphere);
-
+	hit_plane(&time, ray, scene.plane, scene.count.plane);
 	if (time.index == -1)
 	{
 		return (vec3_newv(-1.0));
 	}
 
+	t_vec3	allcolor;
 	t_vec3	color;
 
+
+	allcolor = vec3_newv(0.0);
 	if (time.type == SPHERE)
 	{
 		color = scene.sphere[time.index].color;
+		t_ray	newray;
+		int		i;
+
+		i = 0;
+		allcolor = vec3_add(allcolor, vec3_mul(scene.sphere[time.index].color, vec3_mulv(scene.ambient.color, scene.ambient.lighting)));
+		while (i < scene.count.light)
+		{
+			color = scene.sphere[time.index].color;
+			newray.origin = ray_pos(ray, time.time);
+			newray.direction = vec3_norm(vec3_sub(scene.light[i].location, newray.origin));
+
+			if (is_path_free(scene, newray, scene.light[i].location) == FALSE)
+			{	
+				i += 1;
+				continue;
+			}
+
+			t_vec3	normal;
+			t_vec3	diffuse;
+			t_vec3	reflected;
+			t_vec3	specular;
+
+			normal = vec3_norm(vec3_add(vec3_sub(ray.origin, scene.sphere[time.index].location), vec3_mulv(ray.direction, time.time)));
+
+			reflected = reflect(ray.direction, normal);
+			reflected = vec3_mapv(vec3_mulv(scene.light[i].color, vec3_dot(newray.direction, reflected)), 0.0, maxf);
+			specular = vec3_mapv(reflected, 16.0, powf);
+			diffuse = vec3_mapv(vec3_mulv(scene.light[i].color, vec3_dot(newray.direction, normal)), 0.0, maxf);
+			color = vec3_mulv(vec3_mul(color, diffuse), scene.light[i].intensity);
+			color = vec3_add(color, specular);
+			color = vec3_add(color, vec3_mul(color, specular));
+
+			allcolor = vec3_add(allcolor, color);
+			i += 1;
+		}
+
 	}
-	if (time.type == LINE)
+	else if (time.type == LINE)
 	{
 		if (time.index == 0)
 		{
@@ -74,45 +172,10 @@ t_vec3	ray_cast(t_scene scene, t_ray ray)
 			return (vec3_new(0.2, 0.2, 0.8));
 		}
 	}
-
-	t_ray	newray;
-	int		i;
-
-	i = 0;
-
-	t_vec3	allcolor;
-
-	allcolor = vec3_newv(0.0);
-	allcolor = vec3_add(allcolor, vec3_mul(scene.sphere[time.index].color, vec3_mulv(scene.ambient.color, scene.ambient.lighting)));
-	while (i < scene.count.light)
+	else if (time.type == PLANE)
 	{
-		color = scene.sphere[time.index].color;
-		newray.origin = ray_pos(ray, time.time);
-		newray.direction = vec3_norm(vec3_sub(scene.light[i].location, newray.origin));
-
-		if (is_path_free(scene, newray, scene.light[i].location) == FALSE)
-		{	
-			i += 1;
-			continue;
-		}
-
-		t_vec3	normal;
-		t_vec3	diffuse;
-		t_vec3	reflected;
-		t_vec3	specular;
-
-		normal = vec3_norm(vec3_add(vec3_sub(ray.origin, scene.sphere[time.index].location), vec3_mulv(ray.direction, time.time)));
-
-		reflected = reflect(ray.direction, normal);
-		reflected = vec3_mapv(vec3_mulv(scene.light[i].color, vec3_dot(newray.direction, reflected)), 0.0, maxf);
-		specular = vec3_mapv(reflected, 16.0, powf);
-		diffuse = vec3_mapv(vec3_mulv(scene.light[i].color, vec3_dot(newray.direction, normal)), 0.0, maxf);
-		color = vec3_mulv(vec3_mul(color, diffuse), scene.light[i].intensity);
-		color = vec3_add(color, specular);
-		color = vec3_add(color, vec3_mul(color, specular));
-
-		allcolor = vec3_add(allcolor, color);
-		i += 1;
+		color = scene.plane[time.index].color;
+		allcolor = vec3_add(allcolor, vec3_mul(color, vec3_mulv(scene.ambient.color, scene.ambient.lighting)));
 	}
 
 	return (allcolor);

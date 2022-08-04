@@ -89,6 +89,7 @@ struct s_pln
 	t_vec3	vector;
 	t_vec3	scale;
 	t_vec3	color;
+	float	time;
 	int		flag_pl;
 };
 
