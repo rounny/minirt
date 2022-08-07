@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:09 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/01 01:28:57 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/08/07 15:28:56 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_vec3	vec3_add(t_vec3 a, t_vec3 b);
 t_vec3	vec3_divv(t_vec3 vec, float value);
 t_vec3	vec3_div(t_vec3 a, t_vec3 b);
 float	vec3_dot(t_vec3 a, t_vec3 b);
+t_vec3	vec3_cross(t_vec3 a, t_vec3 b);
 float	vec3_len(t_vec3 vec);
 t_vec3	vec3_mapv(t_vec3 vec, float value, float (*func)(float, float));
 t_vec3	vec3_map(t_vec3 a, t_vec3 b, float (*func)(float, float));

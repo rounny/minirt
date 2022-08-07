@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 14:43:39 by lemmon            #+#    #+#             */
-/*   Updated: 2022/07/18 17:54:31 by lemmon           ###   ########.fr       */
+/*   Updated: 2022/08/07 20:20:14 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	parse_camera(char *str, t_scene *scene)
 		ft_error("dublicate of sceneions");
 	check_next_element(str, i);
 	scene->camera.location = parse_vector(str, &i);
+	scene->camera.location.z *= -1;
 	scene->camera.rotation = parse_vector(str, &i);
 	check_vector(scene->camera.rotation);
 	check_next_element(str, i);

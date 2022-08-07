@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:19 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/18 17:32:29 by lemmon           ###   ########.fr       */
+/*   Updated: 2022/08/07 20:41:51 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ t_view	set_view(void *canvas)
 
 void	set_options(t_scene *scene)
 {
-	scene->camera.rotation = vec3_new(0.0, 26.0, 152.0);
+	scene->camera.rotation = vec3_new(scene->camera.rotation.x * 360, \
+								scene->camera.rotation.y * 360,\
+								scene->camera.rotation.z * 360);
 	matrix_new(scene->option.matrix);
 	matrix_rotate(scene->option.matrix, scene->camera.rotation);
 	scene->option.smooth = FALSE;

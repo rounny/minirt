@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 12:15:04 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/18 18:03:53 by lemmon           ###   ########.fr       */
+/*   Updated: 2022/08/07 15:47:08 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ struct s_clnd
 	int		flag_cy;
 	float	diameter;
 	float	height;
+	t_vec2	time;
 };
 
 struct s_count

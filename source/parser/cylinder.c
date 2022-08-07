@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 14:44:12 by lemmon            #+#    #+#             */
-/*   Updated: 2022/07/11 15:47:20 by lemmon           ###   ########.fr       */
+/*   Updated: 2022/08/07 19:39:57 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	parse_cylinder(char *str, t_clnd *cylinder, t_scene *scene)
 	i = 0;
 	check_next_element(str, i);
 	cylinder->coordinates = parse_vector(str, &i);
+	cylinder->coordinates.z *= -1;
 	cylinder->vector = parse_vector(str, &i);
 	check_vector(cylinder->vector);
 	check_digit(str, i);
