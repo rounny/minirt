@@ -28,7 +28,8 @@
 		"__node_handle": "c",
 		"chrono": "c",
 		"variant": "c",
-		"__bit_reference": "c"
+		"__bit_reference": "c",
+		"random": "c"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }

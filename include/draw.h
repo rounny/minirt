@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:20:58 by ccamie            #+#    #+#             */
-/*   Updated: 2022/07/16 23:31:57 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/08/09 13:10:42 by lemmon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "minirt.h"
 # include "ray.h"
+# define EPSILON 1e-6
 
 struct s_time
 {

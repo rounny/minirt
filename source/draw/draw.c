@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lemmon <lemmon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 01:21:40 by ccamie            #+#    #+#             */
-/*   Updated: 2022/08/07 21:41:45 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/08/09 15:19:49 by lemmon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,14 @@ void	hit_plane(t_time *time, t_ray ray, t_pln *planes, int count)
 	// a = vec3_dot(ray.direction, ray.direction) - powf(vec3_dot(ray.direction, vector), 2);
 	// b = vec3_dot(ray.direction, origin) - vec3_dot(ray.direction, vector) * vec3_dot(origin, vector);
 
+
+
+
+
+
+
+
+
 t_vec2	draw_cylinder(t_ray ray, t_vec3 center, float diameter, float height, t_vec3 vector)
 {
 	t_vec3	origin;
@@ -113,26 +121,71 @@ t_vec2	draw_cylinder(t_ray ray, t_vec3 center, float diameter, float height, t_v
 	float	b;
 	float	c;
 	float	h;
+	float	t1;
+	float	t2;
 
 	(void)a;
 	(void)height;
 	origin = vec3_sub(ray.origin, center);
-	a = 1 - powf(vec3_dot(ray.direction, vector), 2);
+	a = vec3_dot(ray.direction,ray.direction) - powf(vec3_dot(ray.direction, vector), 2);
 	b = vec3_dot(ray.direction, origin) - vec3_dot(ray.direction, vector) * vec3_dot(origin, vector);
-	b *= -2; 
-	c = vec3_dot(vector, vector) - powf(vec3_dot(origin, vector), 2) - powf(diameter / 2, 2);
+	b *= 2; 
+	c = vec3_dot(origin, origin) - powf(vec3_dot(origin, vector), 2) - powf(diameter / 2, 2);
 	h = b * b - 4 * a * c;
 	if (h < 0.0)
-	{
 		return (vec2_new(-1.0, -1.0));
-	}
 	else
-	{
-		// printf("h: %f\n", -b - h);
 		h = sqrt(h);
-		return (vec2_new((-b - h) / (2 * a), (-b + h) / (2 * a)));
-	}
+	t1 = (-b - h) / (2 * a);
+	t2 =  (-b + h) / (2 * a);
+	if (fmin(t1, t2)  > EPSILON)
+		return(vec2_new(t1, t2));
+	return(vec2_new(t2, t1));
 }
+
+// t_vec2	draw_cylinder(t_ray ray, t_vec3 center, float diameter, float height, t_vec3 vector)
+// {
+// 	t_vec3	origin;
+// 	float	a;
+// 	float	b;
+// 	float	c;
+// 	float	h;
+// 	float	t1;
+// 	float	t2;
+
+// 	(void)a;
+// 	(void)height;
+// 	origin = vec3_sub(ray.origin, center);
+// 	// vec3_norm(vector);
+// 	a = vec3_dot(ray.direction,ray.direction) - powf(vec3_dot(ray.direction, vector), 2);
+// 	b = vec3_dot(ray.direction, origin) - vec3_dot(ray.direction, vector) * vec3_dot(origin, vector);
+// 	b *= 2; 
+// 	c = vec3_dot(origin, origin) - powf(vec3_dot(origin, vector), 2) - powf(diameter / 2, 2);
+// 	h = b * b - 4 * a * c;
+// 	if (h < 0.0)
+// 	{
+// 		return (vec2_new(-1.0, -1.0));
+// 		// return (-1);
+
+// 	}
+// 	else
+// 	{
+// 		// printf("h: %f\n", -b - h);
+// 		// printf("h - %f\n", h);
+// 		h = sqrt(h);
+	
+// 		// return (vec2_new((-b - h) / (2 * a), (-b + h) / (2 * a)));
+// 	}
+// 	t1 = (-b - h) / (2 * a);
+// 	t2 =  (-b + h) / (2 * a);
+// 	// if (fmin(t1, t2)  > EPSILON)
+// 	// 	return(fmin(vec2_new(t1, t2)));
+// 	// return(fmax(vec2_new(t1, t2)));
+// 	if (fmin(t1, t2)  > EPSILON)
+// 		return(vec2_new(t1, t2));
+// 	return(vec2_new(t2, t1));
+	
+// }
 
 static int	get_min_index_cld(t_clnd *cylinders, int count)
 {
